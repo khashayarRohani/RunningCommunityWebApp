@@ -59,6 +59,30 @@ namespace RunGroopWebApp.Controllers
             };
             return View(userDetailViewModel);
         }
-        
+        public async Task<IActionResult> Delete(string id)
+        {
+            var userDetails = await _userRepository.GetUserById(id);
+            if (userDetails == null)
+            {
+                return View("Error");
+            }
+            return View(userDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var userDetail = await _userRepository.GetUserById(id);
+            if (userDetail == null)
+            {
+                return View("Error");
+            }
+
+            _userRepository.Delete(userDetail);
+
+            return RedirectToAction("Index");
+
+        }
+
     }
 }
