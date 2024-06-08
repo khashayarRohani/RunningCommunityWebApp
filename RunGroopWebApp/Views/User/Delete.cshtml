@@ -1,0 +1,50 @@
+﻿﻿@using RunGroopWebApp.ViewModels
+@model AppUser
+
+
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <input type="hidden" id="Id" name="Id" asp-for="Id" /> 
+    <input type="hidden" value="AddressId" id="AddressId" />
+    <div class="form-group">
+        <label asp-for="Pace">Pace</label>
+        <input asp-for="Pace" class="form-control" placeholder="Pace">
+        <span asp-validation-for="Pace" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mileage">Mileage</label>
+        <input asp-for="Mileage" class="form-control" placeholder="Mileage">
+        <span asp-validation-for="Mileage" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="City">City</label>
+        <input asp-for="City" class="form-control" placeholder="City">
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="State">State</label>
+        <input asp-for="State" class="form-control" placeholder="State">
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+</form>
+<div class="form-group">
+    <label asp-for="Address.Street">Street</label>
+    <input asp-for="Address.Street" class="form-control" placeholder="Street">
+    <span asp-validation-for="Address.Street" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Address.City">City</label>
+    <input asp-for="Address.City" class="form-control" placeholder="City">
+    <span asp-validation-for="Address.Street" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Address.State">State</label>
+    <input asp-for="Address.State" class="form-control" placeholder="Street">
+    <span asp-validation-for="Address.State" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <form action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+    </form>
+</div> 
