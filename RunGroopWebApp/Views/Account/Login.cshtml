@@ -15,6 +15,12 @@
                 <span><b>Sorry!</b> - @TempData["Error"]</span>
             </div>
         }
+        @if (User.Identity.IsAuthenticated)
+        {
+            <script>
+                window.location.href = '@Url.Action("Index", "Dashboard")';
+            </script>
+        }
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-action="Login">
