@@ -26,6 +26,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
+builder.Services.AddAuthentication().AddGoogle(x =>
+{
+    x.ClientId = "";// In google developer create you account then get these two parameter
+    x.ClientSecret = "";
+});
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(); 
 var app = builder.Build();
