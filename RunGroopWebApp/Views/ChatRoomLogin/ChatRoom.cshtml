@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>ChatRoom</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/microsoft-signalr/signalr.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <h1>Chat Room</h1>
+    <div class="container">
+        <label>Username</label>
+        <label>@ViewData["username"]</label>
+    </div>
+    <div>
+        <label>Message</label>
+        <input class="form-control" id="txtmessage" />
+        <button id="btnsend" class="btn btn-primary">Send</button>
+    </div>
+    <div>
+        <div id="div1">
+        </div>
+    </div>
+    <script>
+        $(() => {
+            alert('Hii')
+            var connection = new signalR.HubConnectionBuilder().withUrl("/chatroom").build();
+
+            connection.on('ReceiveMessage',
+                (username, message) => {
+                    $(div1).append(`<b>${username}</b>: ${message}<br/>`)
+                })
+            $(btnsend).click(function () {
+                alert('btnsend')
+                connection.invoke('SendMessage',
+                    `@ViewData["username"]`, $(txtmessage).val())
+
+            })
+            connection.start().then(function () {
+                alert('SignalR Connected to Server Successfully....!')
+            }).catch(x => { alert('Error') })
+        })
+
+    </script>
+</body>
+</html>
